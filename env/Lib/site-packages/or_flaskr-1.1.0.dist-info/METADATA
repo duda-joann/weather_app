@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: or-flaskr
+Version: 1.1.0
+Summary: Flask tutorial
+Home-page: UNKNOWN
+Author: Olivier Renault
+Author-email: olivier@renaultconsulting.fr
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: flask
+
+This package serves as a python code baseline for Gitlab CI/CD practice
+
+

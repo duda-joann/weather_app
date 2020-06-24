@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename ='style.css')}}">
+    <title>Check Weather</title>
+</head>
+
+<body>
+    <header>
+        <img class="d-block w-100" src="{{ url_for('static', filename ='clouds2.jpg')}}" alt="Header">
+    </header>
+    <main>
+        <h2 class="description"> Weather Forecast </h2>
+        <h3 class="description"> About Service </h3>
+        <p class="description">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi,
+            id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+        </p>
+        <form action="{{ url_for('show_current_weather') }}" method="GET">
+            <div class="form-group">
+                <input class="form-control-lg" name="city" type="text" placeholder="Check City"> <br>
+                <input class="btn btn-primary" type="submit" name="city" value="Submit">
+                <input class="btn btn-primary" type="reset" name="reset" value="Reset">
+            </div>
+        </form>
+        <p class="description"> Current weather conditions for your town </p>
+        <div class="parameters">
+        <div class="icon">
+            <img class="d-block w-50" src="{{ url_for('static', filename ='icon.jpg')}}" alt="Sun">
+        </div>
+            {% for item in weather%}
+            {% if item == "temperature" %}
+            <p> Temperature : {{weather[item]}} [°C] <br> {% endif %} {% if item == "feels_like" %} Feels like : {{weather[item]}} [°C] <br> {% endif %} {% if item == "pressure" %} Pressure : {{weather[item]}} [hPa] <br> {% endif %} {% if item == "humidity"
+                %} Humidity : {{weather[item]}} % <br> {% endif %} {% if item == "wind" %} Speed of wind : {{weather[item]}} [m/s] </p>
+            {% endif %} {% endfor %}
+
+        </div>
+
+        </p>
+        <h3 class="description"> How to use</h3>
+        <p class="description">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi,
+            id est laborum et dolorum fuga.
+        </p>
+        <section>
+            <h2 class="description"> Check weather for the next days </h2>
+            <form action="{{ url_for('generate_forecast_weather') }}" method="GET">
+                <div class="form-group">
+                    <input class="form-control-lg" name="city" type="text" placeholder="Check City"> <br>
+                    <input class="btn btn-primary" type="submit" name="city" value="Submit">
+                </div>
+            </form>
+            <div class="forecast">
+                <p> Weather forecast for the next days </p>
+                {% for day in forecast_weather %}
+                <div class="container">
+                    <img class="d-block w-25" src="{{ url_for('static', filename ='icon.jpg')}}" alt="Sun">
+                    {% for key, value in day.items() %}
+                    {{key}}: {{value}} <br>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <div class="container d-flex flex-column align-items-center">
+                <h2> World map </h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d45735758.9045078!2d-4.775173441731422!3d45.
+        600812475972575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46ed8886cfadda85%3A0x72ef99e6b3fcf079!2s
+        Europa!5e0!3m2!1spl!2spl!4v1590138242077!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+
+        </section>
+    </main>
+    <footer class="text-muted"> Copyright Joanna Duda </footer>
+</body>
+
+</html>
